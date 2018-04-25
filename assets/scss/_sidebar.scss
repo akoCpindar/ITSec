@@ -1,0 +1,315 @@
+/* Sidebar */
+.sidebar {
+  min-height: calc(100vh - #{$navbar-height});
+  background: $sidebar-bg;
+  font-family: $type-1;
+  padding: 0;
+  width: $sidebar-width-lg;
+  z-index: 11;
+  transition: width $action-transition-duration $action-transition-timing-function, background $action-transition-duration $action-transition-timing-function;
+  -webkit-transition: width $action-transition-duration $action-transition-timing-function, background $action-transition-duration $action-transition-timing-function;
+  -moz-transition: width $action-transition-duration $action-transition-timing-function, background $action-transition-duration $action-transition-timing-function;
+  -ms-transition: width $action-transition-duration $action-transition-timing-function, background $action-transition-duration $action-transition-timing-function;
+
+  .nav {
+    overflow: hidden;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    padding-top: 30px;
+    padding-bottom: 50px;
+
+    .nav-item {
+      .collapse {
+        z-index: 999;
+      }
+
+      .collapse.show,
+      .collapsing {
+        background: $sidebar-menu-active-bg;
+      }
+
+      .nav-link {
+        align-items: center;
+        display: flex;
+        padding: $sidebar-menu-padding;
+        white-space: nowrap;
+        height: $nav-link-height;
+        color: $sidebar-menu-color;
+
+        &[aria-expanded="true"] {
+          background: $sidebar-menu-active-bg;
+          i {
+            &.menu-arrow {
+              &:before {
+                content: "\F360";
+                font-family: "Material Design Icons";
+                color: rgba($sidebar-menu-color,1);
+              }
+            }
+          }
+        }
+
+        .menu-icon {
+          margin-right: 1.25rem;
+          width: $sidebar-icon-size;
+          line-height: 1;
+          .rtl & {
+            margin-right: 0;
+            margin-left: 1.25rem;
+          }
+        }
+
+        i {
+          color: $sidebar-menu-icon-color;
+
+          &.menu-arrow {
+            margin-left: auto;
+            margin-right: 0;
+
+            &:before {
+              content: "\F35D";
+              font-family: "Material Design Icons";
+              font-size: 18px;
+              line-height: 1;
+              font-style: normal;
+              vertical-align: middle;
+              color: rgba($sidebar-menu-color,0.5);
+            }
+          }
+        }
+
+        .menu-title {
+          color: inherit;
+          display: inline-block;
+          font-size: $sidebar-menu-font-size;
+          line-height: 1;
+          vertical-align: middle;
+        }
+
+        .badge {
+          margin-left: auto;
+        }
+
+        &:hover {
+          color: darken($sidebar-menu-color, 5%);
+          transition: all 0.75s ease;
+        }
+      }
+
+      &.nav-profile {
+        background: $sidebar-profile-bg;
+
+        .nav-link {
+          font-family: $type-1;
+          display: block;
+          height: auto;
+          padding: $sidebar-profile-padding;
+        }
+
+        .profile-image {
+          position: relative;
+          width: 70px;
+          height: 70px;
+          margin: auto;
+
+          img {
+            width: 70px;
+            height: 70px;
+            border-radius: 100%;
+          }
+        }
+
+        .profile-name {
+          margin-top: 0.75rem;
+          text-align: center;
+
+          .rtl & {
+            margin-left: auto;
+            margin-right: 0.75rem;
+          }
+
+          .designation,
+          .name {
+            font-family: $type-1;
+            margin-bottom: 0;
+            line-height: 1.5;
+            font-weight: 500;
+          }
+
+          .name {
+            color: $sidebar-profile-name-color;
+          }
+
+          .designation {
+            color: $sidebar-profile-title-color;
+            font-size: 0.75rem;
+          }
+        }
+
+        i {
+          color: color(white);
+          font-size: 1rem;
+          margin-left: auto;
+        }
+      }
+
+      &.active {
+        > .nav-link {
+          color: $sidebar-menu-active-color;
+
+          .menu-title,
+          i {
+            color: inherit;
+          }
+        }
+      }
+    }
+
+    &:not(.sub-menu) {
+      > .nav-item {
+        &:hover {
+          &:not(.nav-profile) {
+            > .nav-link {
+              background: $sidebar-menu-hover-bg;
+              color: $sidebar-menu-hover-color;
+            }
+          }
+        }
+      }
+    }
+
+    &.sub-menu {
+      margin-bottom: 0;
+      padding: $sidebar-submenu-padding;
+
+      .nav-item {
+        .nav-link {
+          color: $sidebar-submenu-color;
+          padding: $sidebar-submenu-item-padding;
+          font-size: $sidebar-submenu-font-size;
+          line-height: 1;
+          height: auto;
+
+          &.active {
+            color: $sidebar-menu-active-color;
+            background: transparent;
+
+            &:before {
+              background: $sidebar-menu-active-color;
+            }
+          }
+        }
+
+        &:hover {
+          > .nav-link {
+            background: $sidebar-submenu-hover-bg;
+            color: $sidebar-submenu-hover-color;
+            transition: all 0.75s ease;
+
+            &:before {
+              background: $sidebar-submenu-hover-color;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.collapsing {
+  -webkit-transition: none !important;
+  transition: none !important;
+  display: none !important;
+}
+.sidebar.minimize {
+  width: $sidebar-width-icon;
+  .nav {
+    .nav-item {
+      .nav-link {
+        .menu-title {
+          display: none;
+        }
+        &[aria-expanded="true"] {
+          background: $sidebar-menu-active-bg;
+          i {
+            &.menu-arrow {
+              &:before {
+                content: "\F35E";
+                font-family: "Material Design Icons";
+                color: rgba($sidebar-menu-color,1);
+                transition: all 0.35s ease;
+              }
+            }
+          }
+        }
+        i {
+          color: $sidebar-menu-icon-color;
+
+          &.menu-arrow {
+            margin-left: auto;
+            margin-right: 0;
+
+            &:before {
+              content: "\F35F";
+              font-family: "Material Design Icons";
+              font-size: 18px;
+              line-height: 1;
+              font-style: normal;
+              vertical-align: middle;
+              color: rgba($sidebar-menu-color,0.5);
+            }
+          }
+        }
+      }
+      .collapse{
+        ul {
+          left: $sidebar-width-icon;
+          position: absolute;
+          background: $sidebar-menu-active-bg;
+          margin-top: -50px;
+          padding: 0 2rem 0 1rem;
+        }
+      }
+    }
+    .nav-item.active {
+      .nav-link{
+        i{
+          color: $sidebar-menu-active-color;
+        }
+      }
+    }
+  }
+}
+/* style for off-canvas menu*/
+@media screen and (max-width: 991px) {
+  .sidebar-offcanvas {
+    position: fixed;
+    max-height: calc(100vh - #{$navbar-height});
+    top: $navbar-height;
+    bottom: 0;
+    overflow: auto;
+    left: -$sidebar-width-lg;
+    -webkit-transition: all 0.25s ease-out;
+    -o-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+
+    &.active {
+      left: 0;
+    }
+  }
+
+  .sidebar-offcanvas.minimize{
+    width: $sidebar-width-lg;
+    .nav {
+      .nav-item {
+        .nav-link {
+          .menu-title {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  #sidenavToggler{
+    display: none;
+  }
+}
